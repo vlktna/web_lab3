@@ -1,0 +1,44 @@
+body {
+    font-family: "Trebuchet MS", serif;
+    margin: 0;
+    padding: 0;
+    font-size: 130%;
+}
+
+.header {
+    color: #ffffff;
+    /*background-color: #4b4e6d;*/
+    background-color: red;
+    padding: 0.5%;
+}
+
+.stud_name {
+    float: right;
+    margin-right: 3%;
+}
+
+.task {
+    margin-left: 3%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.form-container {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 12px 20px;
+    font-size: 120%;
+}
+
+
+
+footer {
+    background-color: #4b4e6d;
+    padding: 0.5%;
+    text-align: center;
+}
