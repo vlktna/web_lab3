@@ -9,13 +9,25 @@
 <ui:include src="/view/title.xhtml"/>
 
 <h:body>
-    <ui:include src="/view/header.xhtml"/>
+    <div class="header">
+        <h:form>
+            <h:commandButton action = "index" value = "to first page"/>
+        </h:form>
+    </div>
 
-    <h:form>
-        <h:commandButton action = "index" value = "back" />
-    </h:form>
+    <div class="container">
+        <ui:include src="/view/plot.xhtml"/>
+        <ui:include src="/view/form.xhtml"/>
+    </div>
 
-    <ui:include src="/view/footer.xhtml"/>
+    <div class="table">
+        <ui:include src="/view/table.xhtml"/>
+    </div>
+
+    <div class="footer">
+        <ui:include src="/view/footer.xhtml"/>
+    </div>
+
 </h:body>
 
 </html>
