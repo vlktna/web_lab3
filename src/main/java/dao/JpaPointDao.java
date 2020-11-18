@@ -29,26 +29,28 @@ public class JpaPointDao implements Dao<Point> {
 
     @Override
     public void save(Point point) {
-        executeInsideTransaction(entityManager -> entityManager.persist(point));
+        executeSessionTransaction(entityManager -> entityManager.persist(point));
     }
 
-//    @Resource
-//    UserTransaction utx;
-//
-//    @Override
-//    public void deleteAll() {
-//        try {
-//
-//            utx.begin();
-//            Query query = em.createQuery("DELETE FROM Point");
-//            query.executeUpdate();
-//            utx.commit();
-//        } catch (NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Override
+    public void deleteAll() {
+        executeQueryTransaction("DELETE FROM Point");
+    }
 
-    private void executeInsideTransaction(Consumer<EntityManager> action) {
+    private void executeQueryTransaction(String request){
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            Query query = em.createQuery(request);
+            query.executeUpdate();
+            tx.commit();
+        } catch (RollbackException e) {
+            tx.rollback();
+            throw e;
+        }
+    }
+
+    private void executeSessionTransaction(Consumer<EntityManager> action) {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
