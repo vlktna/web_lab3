@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <h:outputScript name="js/drawPoint.js"/>
+    <ui:include src="/view/title.xhtml"/>
+
+    <h:form id="form">
+        <p:message for="valueX"/>
+        <p:message for="valueY"/>
+        <p:message for="valueR"/>
+        <div class="form-container">
+            <h:outputLabel for="valueX" value="X="/>
+            <h:outputText id="valueX" value="#{pointBean.point.valueX}"/>
+            <div class="form-element">
+                <h:panelGrid columns="7">
+
+                    <h:outputLabel value="-5" for="x1"/>
+                    <h:selectBooleanCheckbox id="x1" >
+                        <f:ajax render="valueX" listener="#{pointBean.point.setValueX(-5)}"/>
+                    </h:selectBooleanCheckbox>
+
+                    <h:outputLabel value="-4" for="x2"/>
+                    <h:selectBooleanCheckbox id="x2">
+                        <f:ajax render="valueX" listener="#{pointBean.point.setValueX(-4)}"/>
+                    </h:selectBooleanCheckbox>
+
+                    <h:outputLabel value="-3" for="x3"/>
+                    <h:selectBooleanCheckbox id="x3">
+                        <f:ajax render="valueX" listener="#{pointBean.point.setValueX(-3)}"/>
+                    </h:selectBooleanCheckbox>
+
+                    <h:outputLabel value="-2" for="x4"/>
+                    <h:selectBooleanCheckbox id="x4">
+                        <f:ajax render="valueX" listener="#{pointBean.point.setValueX(-2)}"/>
+                    </h:selectBooleanCheckbox>
+
+                    <h:outputLabel value="-1" for="x5"/>
+                    <h:selectBooleanCheckbox id="x5">
+                        <f:ajax render="valueX" listener="#{pointBean.point.setValueX(-1)}"/>
+                    </h:selectBooleanCheckbox>
+
+                    <h:outputLabel value="0" for="x6"/>
+                    <h:selectBooleanCheckbox id="x6">
+                        <f:ajax render="valueX" listener="#{pointBean.point.setValueX(0)}"/>
+                    </h:selectBooleanCheckbox>
+
+                    <h:outputLabel value="1" for="x7"/>
+                    <h:selectBooleanCheckbox id="x7">
+                        <f:ajax render="valueX" listener="#{pointBean.point.setValueX(1)}"/>
+                    </h:selectBooleanCheckbox>
+                </h:panelGrid>
+
+            </div>
+
+            <div class="form-element">
+                <label for="valueY">Y=</label>
+                <p:inputText id="valueY" value="#{pointBean.point.valueY}" placeholder="(-3;3)" required="true"
+                             converterMessage="Значение Y должно быть числом"
+                             requiredMessage="Не введено значение Y">
+                    <f:converter converterId="doubleConverter"/>
+                    <f:attribute name="name" value="Y"/>
+                    <f:attribute name="min" value="-3"/>
+                    <f:attribute name="max" value="3"/>
+                    <f:validator validatorId="doubleValidator"/>
+                </p:inputText>
+            </div>
+
+
+            <div class="form-element">
+                <label for="valueR">R=</label>
+                <p:panelGrid columns="1">
+                    <p:inputText id="valueR" value="#{pointBean.point.valueR}"
+                                 converterMessage="Значение R должно быть числом"
+                                 requiredMessage="Не введено значение R">
+                        <f:converter converterId="doubleConverter"/>
+                        <f:attribute name="name" value="R"/>
+                        <f:attribute name="min" value="2"/>
+                        <f:attribute name="max" value="5"/>
+                        <f:attribute name="step" value="0.25"/>
+                        <f:validator validatorId="doubleValidator"/>
+                    </p:inputText>
+                    <p:slider for="valueR" minValue="2.25" maxValue="4.75" step="0.25"/>
+                </p:panelGrid>
+            </div>
+
+            <h:commandButton action="#{pointBean.addPoint}" value="CHECK"/>
+            <h:commandButton value="check">
+                <p:ajax process="@form" listener="#{pointBean.addPoint}" update="table" oncomplete="addPoint()"/>
+            </h:commandButton>
+
+        </div>
+    </h:form>
+
+</ui:composition>
