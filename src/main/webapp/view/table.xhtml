@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid>
+        <p:dataTable id="table" var="Point" value="#{pointBean.pointsList}">
+            <p:column id="table-valueX" headerText="x">
+                <h:outputText value="#{Point.valueX}"/>
+            </p:column>
+
+            <p:column headerText="y">
+                <h:outputText id="table-valueY" value="#{Point.valueY}"/>
+            </p:column>
+
+            <p:column id="table-valueR" headerText="r">
+                <h:outputText value="#{Point.valueR}"/>
+            </p:column>
+
+            <p:column id="table-result" headerText="result">
+                <h:outputText value="#{Point.result}"/>
+            </p:column>
+
+            <p:column id="table-time" headerText="time">
+                <h:outputText value="#{Point.time}"/>
+            </p:column>
+        </p:dataTable>
+    </h:panelGrid>
+</ui:composition>
