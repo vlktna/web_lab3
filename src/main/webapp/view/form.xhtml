@@ -3,13 +3,12 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
-    <h:outputScript name="js/drawPoint.js"/>
+    <h:outputScript name="js/TargetDot.js"/>
     <ui:include src="/view/title.xhtml"/>
 
     <h:form id="form">
-        <p:message for="valueX"/>
-        <p:message for="valueY"/>
-        <p:message for="valueR"/>
+        <p:message id="error-y" for="valueY"/>
+        <p:message id="error-r" for="valueR"/>
         <div class="form-container">
             <h:outputLabel for="valueX" value="X="/>
             <h:outputText id="valueX" value="#{pointBean.point.valueX}"/>
@@ -64,9 +63,9 @@
                     <f:attribute name="min" value="-3"/>
                     <f:attribute name="max" value="3"/>
                     <f:validator validatorId="doubleValidator"/>
+                    <f:ajax event="keyup" render="error-y"/>
                 </p:inputText>
             </div>
-
 
             <div class="form-element">
                 <label for="valueR">R=</label>
@@ -80,14 +79,20 @@
                         <f:attribute name="max" value="5"/>
                         <f:attribute name="step" value="0.25"/>
                         <f:validator validatorId="doubleValidator"/>
+                        <f:ajax event="keyup" render="error-r"/>
                     </p:inputText>
-                    <p:slider for="valueR" minValue="2.25" maxValue="4.75" step="0.25"/>
+                    <p:slider for="valueR" minValue="2.25" maxValue="4.75" step="0.25" onSlideEnd="TargetDot.update()"/>
+<!--                        <p:ajax event="slideEnd" process="valueR"/>-->
+
                 </p:panelGrid>
             </div>
 
-            <h:commandButton action="#{pointBean.addPoint}" value="CHECK"/>
             <h:commandButton value="check">
-                <p:ajax process="@form" listener="#{pointBean.addPoint}" update="table" oncomplete="addPoint()"/>
+                <p:ajax process="@form" listener="#{pointBean.addPoint}" update="table, valueX" oncomplete="TargetDot.create()"/>
+            </h:commandButton>
+
+            <h:commandButton value="clear table">
+                <p:ajax listener="#{pointBean.clear}" update="table"/>
             </h:commandButton>
 
         </div>
