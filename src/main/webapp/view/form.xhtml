@@ -52,10 +52,11 @@
                 </h:panelGrid>
 
             </div>
+            <h:outputStylesheet library="css" name="main.css"/>
 
             <div class="form-element">
                 <label for="valueY">Y=</label>
-                <p:inputText id="valueY" value="#{pointBean.point.valueY}" placeholder="(-3;3)" required="true"
+                <p:inputText styleClass="input" id="valueY" value="#{pointBean.point.valueY}" placeholder="(-3;3)" required="true"
                              converterMessage="Значение Y должно быть числом"
                              requiredMessage="Не введено значение Y">
                     <f:converter converterId="doubleConverter"/>
@@ -70,7 +71,7 @@
             <div class="form-element">
                 <label for="valueR">R=</label>
                 <p:panelGrid columns="1">
-                    <p:inputText id="valueR" value="#{pointBean.point.valueR}"
+                    <p:inputText styleClass="ui-panelgrid-blank ui-fluid" id="valueR" value="#{pointBean.point.valueR}"
                                  converterMessage="Значение R должно быть числом"
                                  requiredMessage="Не введено значение R">
                         <f:converter converterId="doubleConverter"/>
@@ -82,16 +83,14 @@
                         <f:ajax event="keyup" render="error-r"/>
                     </p:inputText>
                     <p:slider for="valueR" minValue="2.25" maxValue="4.75" step="0.25" onSlideEnd="TargetDot.update()"/>
-<!--                        <p:ajax event="slideEnd" process="valueR"/>-->
-
                 </p:panelGrid>
             </div>
 
-            <h:commandButton value="check">
+            <h:commandButton value="check" id="check-button">
                 <p:ajax process="@form" listener="#{pointBean.addPoint}" update="table, valueX" oncomplete="TargetDot.create()"/>
             </h:commandButton>
 
-            <h:commandButton value="clear table">
+            <h:commandButton value="clear table" id="clear-button">
                 <p:ajax listener="#{pointBean.clear}" update="table"/>
             </h:commandButton>
 

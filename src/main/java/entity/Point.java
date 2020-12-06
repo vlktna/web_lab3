@@ -1,8 +1,6 @@
 package entity;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
-
+import utils.Validator;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -31,63 +29,74 @@ public class Point implements Serializable {
     @Column(name = "time")
     private String time;
 
-    public Point(){}
-
-    public Point(long id, double valueX, double valueY, double valueR, String result, String time) {
-        super();
-        this.id = id;
-        this.valueX = valueX;
-        this.valueY = valueY;
-        this.valueR = valueR;
-        this.result = result;
-        this.time = time;
+    private boolean checkRectangle(){
+        return valueX >= 0 && valueY <= 0 && valueX <= valueR/2 && valueY >= -valueR;
     }
 
-    public long getId() {
-        return id;
+    private boolean checkQuarterCircle(){
+        return valueX >= 0 && valueY >= 0 && valueX*valueX + valueY*valueY <= valueR*valueR;
+    }
+
+    private boolean checkTriangle(){
+        return valueX <= 0 && valueY >= 0 && valueY <= valueX + valueR;
+    }
+
+    public boolean calculateResult(){
+        return (checkRectangle() || checkQuarterCircle() || checkTriangle()) && Validator.isValid(valueX, valueY, valueR);
+    }
+
+    public Point(){
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "valueX=" + valueX +
+                ", valueY=" + valueY +
+                ", valueR=" + valueR +
+                ", result='" + result + '\'' +
+                ", time='" + time + '\'' +
+                '}';
     }
 
     public double getValueX() {
         return valueX;
     }
 
-    public double getValueY() {
-        return valueY;
-    }
-
-    public double getValueR() {
-        return valueR;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public void setValueX(double valueX) {
         this.valueX = valueX;
+    }
+
+    public double getValueY() {
+        return valueY;
     }
 
     public void setValueY(double valueY) {
         this.valueY = valueY;
     }
 
+    public double getValueR() {
+        return valueR;
+    }
+
     public void setValueR(double valueR) {
         this.valueR = valueR;
+    }
+
+    public String getResult() {
+        return result;
     }
 
     public void setResult(String result) {
         this.result = result;
     }
 
+    public String getTime() {
+        return time;
+    }
+
     public void setTime(String time) {
         this.time = time;
     }
+
 }
