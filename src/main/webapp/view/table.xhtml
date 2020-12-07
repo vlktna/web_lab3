@@ -3,25 +3,29 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
+    <f:facet name="last">
+        <h:outputStylesheet library="css" name="main.css"/>
+    </f:facet>
+
     <h:panelGrid>
         <p:dataTable id="table" var="Point" value="#{pointBean.pointsList}">
-            <p:column id="table-valueX" headerText="x">
-                <h:outputText value="#{Point.valueX}"/>
+            <p:column styleClass="table-value" id="table-valueX" headerText="x">
+                <h:outputText styleClass="sosi" value="#{Point.valueX}"/>
             </p:column>
 
-            <p:column headerText="y">
+            <p:column styleClass="table-value" headerText="y">
                 <h:outputText id="table-valueY" value="#{Point.valueY}"/>
             </p:column>
 
-            <p:column id="table-valueR" headerText="r">
+            <p:column styleClass="table-value" id="table-valueR" headerText="r">
                 <h:outputText value="#{Point.valueR}"/>
             </p:column>
 
-            <p:column id="table-result" headerText="result">
+            <p:column styleClass="table-value" id="table-result" headerText="result">
                 <h:outputText value="#{Point.result}"/>
             </p:column>
 
-            <p:column id="table-time" headerText="time">
+            <p:column styleClass="table-value" id="table-time" headerText="time">
                 <h:outputText value="#{Point.time}"/>
             </p:column>
         </p:dataTable>
