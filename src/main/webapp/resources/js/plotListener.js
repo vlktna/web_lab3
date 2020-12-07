@@ -13,7 +13,7 @@ function newPoint(){
     const calcX = ((valueX - centerX) * valueR / 200).toFixed(3)
     const calcY = ((centerY - valueY) * valueR / 200).toFixed(3)
 
-    if (calcX <= 1 && calcX >= -5 && calcY >= -3 && calcY <= 3 && valueR !== 0) {
+    if (calcX <= 1 && calcX >= -5 && calcY >= -3 && calcY <= 3 && valueR !== 0 && valueR > 2 && valueR < 5) {
         document.getElementById('plot-form:plot-valueX').value = String(calcX);
         document.getElementById('plot-form:plot-valueY').value = String(calcY);
         document.getElementById('plot-form:plot-valueR').value = String(valueR);

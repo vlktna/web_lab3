@@ -39,12 +39,11 @@ class TargetDot {
         let checkQuarterCircle = this.x >= 0 && this.y >= 0 && (this.x*this.x + this.y*this.y) <= this.r*this.r
         let checkTriangle = this.x <= 0 && this.y >= 0 && this.y <= (this.x + this.r)
 
-        console.log(this.x, this.y, this.r, this.result)
         this.result = (checkRectangle || checkQuarterCircle || checkTriangle).toString()
     }
 
     static update() {
-        if (this.x !== null || this.y !== null) {
+        if (this.result) {
             this.r = Number(document.getElementById('form:valueR').value)
             this.calculateResult()
             this.calculateColor()
